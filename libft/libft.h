@@ -6,15 +6,17 @@
 /*   By: alusnia <alusnia@student.42Warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 07:04:37 by alusnia           #+#    #+#             */
-/*   Updated: 2025/11/14 12:41:18 by alusnia          ###   ########.fr       */
+/*   Updated: 2026/02/04 21:08:24 by alusnia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H 
 # define LIBFT_H 
 # include <unistd.h>
+# include <fcntl.h>
 # include <stdlib.h>
 # include <limits.h>
+# include "ft_printf.h"
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -45,6 +47,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*get_next_line(int fd);
 char	**ft_split(char const *s, char c);
 void	ft_bzero(void *s, size_t n);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));

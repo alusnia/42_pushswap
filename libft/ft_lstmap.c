@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alusnia <alusnia@student.42Warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 09:45:35 by alusnia           #+#    #+#             */
-/*   Updated: 2025/12/01 07:47:54 by alusnia          ###   ########.fr       */
+/*   Created: 2025/10/02 16:22:15 by alusnia           #+#    #+#             */
+/*   Updated: 2025/10/02 17:20:10 by alusnia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putendl_fd(char *s, int fd)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	count;
+	t_list	*start;
+	t_list	*new;
 
-	count = 0;
-	if (s)
-		count = ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
-	return (count + 1);
+	start = NULL;
+	new = NULL;
+	if (lst && f && del)
+	{
+		while (lst)
+		{
+			new = ft_lstnew(f(lst->content));
+			if (!new)
+			{
+				ft_lstclear(&start, del);
+				return (NULL);
+			}
+			else
+			{
+				ft_lstadd_back(&start, new);
+				lst = lst->next;
+			}
+		}
+	}
+	return (start);
 }

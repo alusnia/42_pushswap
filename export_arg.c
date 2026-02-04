@@ -6,7 +6,7 @@
 /*   By: alusnia <alusnia@student.42Warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 06:41:04 by alusnia           #+#    #+#             */
-/*   Updated: 2025/11/25 11:08:02 by alusnia          ###   ########.fr       */
+/*   Updated: 2026/02/04 21:12:22 by alusnia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**export_argv(char *start, int *argc)
 	*argc = i;
 	if (i != 0 && ptr)
 	{
-		while (i > 1 && --j >= 0)
+		while (i > 1)
 		{
 			if (start[j] != 0 && (j == 0 || start[j - 1] == 0))
 			{

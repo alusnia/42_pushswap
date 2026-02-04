@@ -6,7 +6,7 @@
 /*   By: alusnia <alusnia@student.42Warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 06:59:03 by alusnia           #+#    #+#             */
-/*   Updated: 2025/11/25 11:57:48 by alusnia          ###   ########.fr       */
+/*   Updated: 2026/02/04 21:09:26 by alusnia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ static t_data	*divide(t_data *data,
 
 t_data	*index_arr(t_data *data)
 {
-	t_list	*temp;
+	//t_list	*temp;
 
 	data->i = 0;
-	temp = data->stack_a;
+	//temp = data->stack_a;
 	while (data->i++ < (size_t)data->argc - 1)
 		data->s_arr[data->i - 1].ptr->index = data->i - 1;
 	free(data->s_arr);
