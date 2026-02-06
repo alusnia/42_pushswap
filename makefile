@@ -1,52 +1,54 @@
-# Compiler
-CC = cc
+CC			= cc
 
-# Compiler flags
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror -g -I$(LIB_DIR)/incs -I$(INCS_DIR)
 
-# Executable Name
-NAME = push_swap
+NAME		= push_swap
 
-LIBFT_DIR = ./libft
+LIB_DIR		= ./lib
 
-LIBFT = $(LIBFT_DIR)/libft.a
+LIB			= $(LIB_DIR)/libftplus.a
 
-FILES = main.c push_swap_utils.c push_swap_utils2.c lst_manage.c quicksort.c \
-		manage_program.c export_arg.c turk_alg.c turk_alg_utils1.c turk_alg_utils2.c
+INCS_DIR	= ./incs
 
-# Object Files
-OBJS = $(FILES:.c=.o)
+INCS 		= $(INCS_DIR)/push_swap.h
 
-# Headers
-HEADERS = push_swap.h $(LIBFT_DIR)/libft.h
+OBJS_DIR	= ./objs
 
-# Default target
+OBJS		= $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+
+SRCS_DIR	= ./srcs
+
+SRCS		= main.c push_swap_utils.c push_swap_utils2.c lst_manage.c quicksort.c \
+			manage_program.c export_arg.c turk_alg.c turk_alg_utils1.c turk_alg_utils2.c
+
 all: $(NAME)
 
-# Build executable
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(LIB) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
 
-# Compile object files
-%.o: %.c $(HEADERS)
+$(LIB):
+	$(MAKE) -C $(LIB_DIR)
+
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(INCS) | $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Build libft
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR)
 
-# Clean object files
 clean:
-	rm -f $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(OBJS_DIR)
+	$(MAKE) -C $(LIB_DIR) clean
 
-# Remove executables and object files
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(LIB_DIR) fclean
 
-# Rebuild everything
 re: fclean all
 
-# Phony targets
-.PHONY: all clean fclean re
+del_lib:
+	@echo $(SEP)
+	@echo "Deleting library libftplus..."
+	@echo $(SEP)
+	$(MAKE) -C $(LIB_DIR) del_lib
+
+.PHONY: all clean fclean re del_lib
